@@ -13,14 +13,11 @@ const getLinks = async (req, res) => {
     const rows = await sheet.getRows()
     const linkTree = rows.map(row => ({
         title: row.Title,
+        slug: row.Slug,
         link: row.Link
     }))
 
     res.send(linkTree)
-}
-
-const postAccess = async () => {
-
 }
 
 export default getLinks
