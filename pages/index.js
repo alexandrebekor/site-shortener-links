@@ -1,13 +1,15 @@
 import Link from 'next/link'
 import React from 'react'
+import { getComponents, getLinks } from '../utils/spreadsheet'
 
-const Index = ({ data }) => {
+const Index = ({ links, title }) => {
     return (
         <div className='flex flex-col'>
-            {data.map(item => {
+            <h2>{title.value}</h2>
+            {links.map(link => {
                 return (
-                    <Link key={item.title} href={`/${item.slug}`}>
-                        <a>{item.title}</a>
+                    <Link key={link.title} href={`/${link.slug}`}>
+                        <a>{link.title}</a>
                     </Link>
                 )
             })}
@@ -17,13 +19,16 @@ const Index = ({ data }) => {
 
 export default Index
 
-export async function getServerSideProps() {
-    const response = await fetch('http://localhost:3000/api/getLinks')
-    const data = await response.json()
+export async function getStaticProps() {
+    const links = await getLinks('0')
+    const components = await getComponents('2060472715')
+
+    const [title] = components.filter(component => component.component === 'Title')
 
     return {
         props: {
-            data
+            links,
+            title
         }
     }
 }
