@@ -1,10 +1,10 @@
-import Link from 'next/link'
 import React from 'react'
+import Link from 'next/link'
 import { getComponents, getLinks } from '../utils/spreadsheet'
 
 const Index = ({ links, title }) => {
     return (
-        <div className='flex flex-col'>
+          <div className='flex flex-col'>
             <h2>{title.value}</h2>
             {links.map(link => {
                 return (
